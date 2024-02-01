@@ -77,12 +77,33 @@ class Account {
                 System.out.println("Invalid choice. Please try again.");
         }
     }
-    void depositAmount()
+    void deposit(Scanner input)
     {
-
+        System.out.print("Enter a valid amount for deposit : ");
+        double newBalance=input.nextInt();
+        this.balance=this.balance+newBalance;
+        System.out.println("Deposit successful.");
     }
-    void withdrawAmount()
+    void withdraw(Scanner input)
     {
-
+        System.out.print("Enter a valid amount for withdraw : ");
+        double newBalance=input.nextInt();
+        if (this.balance-newBalance < 2000 && this.accountType.equals("Current")) {
+            System.out.println("Error: Failed !");
+            System.out.println("Minimum balance required for a Current account is " + 2000);
+            return;
+        }
+        if (this.balance-newBalance < 10000 && this.accountType.equals("Saving")) {
+            System.out.println("Error: Failed!");
+            System.out.println("Minimum balance required for a Saving account is " + 10000);
+            return;
+        }
+        if (this.balance-newBalance < 0 && this.accountType.equals("Salary")) {
+            System.out.println("Error: Failed!");
+            System.out.println("Error: Minimum balance must be positive for Salary account");
+            return;
+        }
+        this.balance=this.balance-newBalance;
+        System.out.println("Withdraw successful.");
     }
 }

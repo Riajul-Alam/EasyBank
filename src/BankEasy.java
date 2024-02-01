@@ -66,9 +66,45 @@ class BankEasy {
             return;
         }
     }
+    private static void depositAmount(Scanner input) {
+        if (accounts.isEmpty()) {
+            System.out.println("No accounts found. Please create an account first.");
+            return;
+        }
+        System.out.println("Enter account number to deposit:");
+        int accountNumber = input.nextInt();
+        Account account = null;
+        for (Account acc : accounts) {
+            if (acc.getAccountNumber() == accountNumber) {
+                account = acc;
+                account.deposit(input);
+            }
+        }
+        if (account == null) {
+            System.out.println("Account not found.");
+            return;
+        }
+    }
 
-
-
+    private static void withdrawAmount(Scanner input) {
+        if (accounts.isEmpty()) {
+            System.out.println("No accounts found. Please create an account first.");
+            return;
+        }
+        System.out.println("Enter account number to withdraw:");
+        int accountNumber = input.nextInt();
+        Account account = null;
+        for (Account acc : accounts) {
+            if (acc.getAccountNumber() == accountNumber) {
+                account = acc;
+                account.withdraw(input);
+            }
+        }
+        if (account == null) {
+            System.out.println("Account not found.");
+            return;
+        }
+    }
 
 
     private static void choiceList() {
@@ -113,11 +149,11 @@ class BankEasy {
             }
             else if(choice==5)
             {
-
+                depositAmount(input);
             }
             else if(choice==6)
             {
-
+                withdrawAmount(input);
             }
             else if(choice==7)
             {
@@ -125,42 +161,10 @@ class BankEasy {
             }
             else
             {
-
+                break;
             }
         }
 
 
-
-
-
-
-
-
-
-
-/*        System.out.print("Enter first name: ");
-        String firstName = input.next();
-        System.out.print("Enter last name: ");
-        String lastName = input.next();
-        System.out.print("Enter account number: ");
-        int accountNumber = input.nextInt();
-        System.out.print("Enter account type: ");
-        String accountType = input.next();
-        System.out.print("Enter opening balance: ");
-        double balance = input.nextDouble();
-        Account account= new Account(firstName,lastName, accountNumber, accountType, balance);
-        System.out.println("Account created successfully!");
-
-        //Display Account
-        System.out.print("Account name: ");
-        System.out.println(account.getAccountName());
-        System.out.print("Account number: ");
-        System.out.println(account.getAccountNumber());
-        System.out.print("Account type: ");
-        System.out.println(account.getAccountType());
-        System.out.print("balance: ");
-        System.out.println(account.getBalance());
-        System.out.print("Creation Date: ");
-        System.out.println(account.getCreationDate());*/
     }
 }
