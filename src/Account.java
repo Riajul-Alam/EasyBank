@@ -31,4 +31,16 @@ class Account {
     public double getBalance() {
         return balance;
     }
+    void updateAccount(Account current)
+    {
+
+    }
+    void depositAmount()
+    {
+
+    }
+    void withdrawAmount()
+    {
+
+    }
 }
