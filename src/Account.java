@@ -1,6 +1,9 @@
 package src;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Scanner;
+
 class Account {
     private String firstName;
     private String lastName;
@@ -31,9 +34,48 @@ class Account {
     public double getBalance() {
         return balance;
     }
-    void updateAccount(Account current)
+    public void updateAccount(Scanner input)
     {
 
+        System.out.println("Choose what to update:");
+        System.out.println("1. Name");
+        System.out.println("2. Balance");
+        int updateChoice = input.nextInt();
+
+        switch (updateChoice) {
+            case 1:
+                System.out.println("Enter new firstName:");
+                String firstName = input.nextLine();
+                System.out.println("Enter new lastName:");
+                String lastName = input.nextLine();
+                this.firstName=firstName;
+                this.lastName=lastName;
+                System.out.println("Name updated successfully.");
+                break;
+            case 2:
+                System.out.print("Enter a valid amount for update balance : ");
+                double newBalance=input.nextInt();
+                if (newBalance < 2000 && this.accountType.equals("Current")) {
+                    System.out.println("Error: Failed !");
+                    System.out.println("Minimum balance required for a Current account is " + 2000);
+                    return;
+                }
+                if (newBalance < 10000 && this.accountType.equals("Saving")) {
+                    System.out.println("Error: Failed!");
+                    System.out.println("Minimum balance required for a Saving account is " + 10000);
+                    return;
+                }
+                if (newBalance < 0 && this.accountType.equals("Salary")) {
+                    System.out.println("Error: Failed!");
+                    System.out.println("Error: Minimum balance must be positive for Salary account");
+                    return;
+                }
+                this.balance=newBalance;
+                System.out.println("Balance updated successfully.");
+                break;
+            default:
+                System.out.println("Invalid choice. Please try again.");
+        }
     }
     void depositAmount()
     {

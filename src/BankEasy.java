@@ -46,6 +46,30 @@ class BankEasy {
                     ", Balance: $" + account.getBalance());
         }
     }
+    // Update
+    private static void updateAccount(Scanner input) {
+        if (accounts.isEmpty()) {
+            System.out.println("No accounts found. Please create an account first.");
+            return;
+        }
+        System.out.println("Enter account number to update:");
+        int accountNumber = input.nextInt();
+        Account account = null;
+        for (Account acc : accounts) {
+            if (acc.getAccountNumber() == accountNumber) {
+                account = acc;
+                account.updateAccount(input);
+            }
+        }
+        if (account == null) {
+            System.out.println("Account not found.");
+            return;
+        }
+    }
+
+
+
+
 
     private static void choiceList() {
         System.out.println("Banking Application Menu:");
@@ -81,7 +105,7 @@ class BankEasy {
             }
             else if(choice==3)
             {
-
+                updateAccount(input);
             }
             else if(choice==4)
             {
@@ -99,7 +123,7 @@ class BankEasy {
             {
 
             }
-            else if(choice==8)
+            else
             {
 
             }
