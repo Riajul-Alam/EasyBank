@@ -3,8 +3,6 @@ import java.util.ArrayList;
 import java.util.Scanner;
 class BankEasy {
     private static ArrayList<Account> accounts = new ArrayList<>();
-
-
     private static void createAccount(Scanner input) {
 
         System.out.print("Enter first name: ");
@@ -38,6 +36,7 @@ class BankEasy {
         accounts.add(account);
         System.out.println("Account created successfully!");
     }
+
     private static void displayAllAccounts() {
         System.out.println("Accounts List :");
         for (Account account : accounts) {
@@ -46,7 +45,7 @@ class BankEasy {
                     ", Balance: $" + account.getBalance());
         }
     }
-    // Update
+
     private static void updateAccount(Scanner input) {
         if (accounts.isEmpty()) {
             System.out.println("No accounts found. Please create an account first.");
@@ -66,6 +65,21 @@ class BankEasy {
             return;
         }
     }
+
+    private static void deleteAccount(Scanner input) {
+        System.out.print("Enter an account number to delete: ");
+        int accountNumber = input.nextInt();
+
+        for (int i = 0; i < accounts.size(); i++) {
+            if (accounts.get(i).getAccountNumber() == accountNumber) {
+                accounts.remove(i);
+                System.out.println("Account deleted successfully!");
+                return;
+            }
+        }
+        System.out.println("Account not found.");
+    }
+
     private static void depositAmount(Scanner input) {
         if (accounts.isEmpty()) {
             System.out.println("No accounts found. Please create an account first.");
@@ -106,6 +120,21 @@ class BankEasy {
         }
     }
 
+    private static void searchAccount(Scanner input) {
+        System.out.print("Enter an account number for search: ");
+        int accountNumber = input.nextInt();
+        for (Account account : accounts) {
+            if (account.getAccountNumber() == accountNumber) {
+                System.out.println("Account found:");
+                System.out.println("Name: " + account.getAccountName() + ", Account Number: " + account.getAccountNumber() +
+                        ", Account Type: " + account.getAccountType() + ", Creation Date: " + account.getCreationDate() +
+                        ", Balance: $" + account.getBalance());
+                return;
+            }
+        }
+
+        System.out.println("Account not found.");
+    }
 
     private static void choiceList() {
         System.out.println("Banking Application Menu:");
@@ -145,7 +174,7 @@ class BankEasy {
             }
             else if(choice==4)
             {
-
+                deleteAccount(input);
             }
             else if(choice==5)
             {
@@ -157,14 +186,12 @@ class BankEasy {
             }
             else if(choice==7)
             {
-
+                searchAccount(input);
             }
             else
             {
                 break;
             }
         }
-
-
     }
 }
